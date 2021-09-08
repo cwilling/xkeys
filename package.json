@@ -19,7 +19,9 @@
     "release:bump-prerelease": "lerna version --conventional-commits --conventional-prerelease --no-push",
     "build-record-test": "lerna exec build-record-test",
     "lerna:version": "lerna version",
-    "lerna:publish": "lerna publish"
+    "lerna:publish": "lerna publish",
+    "prepare": "husky install",
+    "husky:precommit": "lerna exec --stream --since HEAD --exclude-dependents -- eslint . --ext .ts,.tsx "
   },
   "devDependencies": {
     "@sofie-automation/code-standard-preset": "0.4.2",
@@ -46,13 +48,6 @@
     "webpack-dev-server": "^4.1.1"
   },
   "prettier": "@sofie-automation/code-standard-preset/.prettierrc.json",
-  "husky": {
-    "hooks": {
-      "pre-commit": [
-        "lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents"
-      ]
-    }
-  },
   "lint-staged": {
     "*.{js,css,json,md,scss}": [
       "prettier --write"
