@@ -33,13 +33,13 @@
     "build:main": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "tslib": "^2.1.0"
+    "tslib": "^2.3.1"
   },
   "optionalDependencies": {
     "usb-detection": "^4.10.0"
   },
   "devDependencies": {
-    "lint-staged": "^7.2.0"
+    "lint-staged": "^11.1.2"
   },
   "prettier": "@sofie-automation/code-standard-preset/.prettierrc.json",
   "engines": {

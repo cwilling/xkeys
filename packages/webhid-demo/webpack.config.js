@@ -1,4 +1,4 @@
-/* eslint-disable node/no-extraneous-require */
+/* eslint-disable node/no-extraneous-require, node/no-unpublished-require */
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { ProvidePlugin } = require('webpack')
@@ -26,10 +26,6 @@ module.exports = {
 		// The destination folder where to put the output bundle
 		path: path.join(__dirname, '/dist'),
 
-		// Wherever resource (css, js, img) you call <script src="..."></script>,
-		// or css, or img use this path as the root
-		publicPath: '/',
-
 		// At some point you'll have to debug your code, that's why I'm giving you
 		// for free a source map file to make your life easier
 		sourceMapFilename: 'main.map',
@@ -38,11 +34,10 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.js'],
 	},
 	devServer: {
-		contentBase: path.join(__dirname, '/public'),
-		// match the output path
-		publicPath: '/',
-		// match the output `publicPath`
-		historyApiFallback: true,
+		static: {
+			directory: path.join(__dirname, 'public'),
+		},
+		compress: false,
 	},
 
 	module: {
@@ -57,7 +52,12 @@ module.exports = {
 
 	plugins: [
 		new CopyWebpackPlugin({
-			patterns: [{ from: path.join(__dirname, '/public'), to: path.join(__dirname, '/dist') }],
+			patterns: [
+				{
+					from: path.join(__dirname, '/public'),
+					to: path.join(__dirname, '/dist'),
+				}
+			],
 		}),
 		new ProvidePlugin({
 			Buffer: ['buffer', 'Buffer'],

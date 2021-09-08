@@ -21,6 +21,7 @@
 			"node"
 		],
 		"importHelpers": false,
-		"declarationMap": true
+		"declarationMap": true,
+		"esModuleInterop": true,
 	}
 }
